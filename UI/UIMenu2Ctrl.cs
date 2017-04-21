@@ -10,7 +10,11 @@ public class UIMenu2Ctrl : UIWindowCtrl
 	// UIWindowCtrl Setup
 	public override void OnShow()
 	{
-		view = windowManager.GetWindowView<UIMenu2View>("UIMenu2");
+		if (view == null)
+		{
+			view = windowManager.GetWindowView<UIMenu2View>("UIMenu2");
+			view.back.onClick.Add(new EventDelegate(OnBack));
+		}
 	}
 
 	public override void OnHide()
@@ -30,7 +34,8 @@ public class UIMenu2Ctrl : UIWindowCtrl
 	// Button Event
 	void OnBack()
 	{
-		// Show Next Window
+		// Pop Window
+		windowManager.PopWindow();
 	}
 
 	void OnDestroy()

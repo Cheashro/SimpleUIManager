@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIMenuCtrl : UIWindowCtrl {
+public class UIWarningCtrl : UIWindowCtrl
+{
 
-	UIMenuView view = null;
+	UIWarningView view = null;
 
 	// UIWindowCtrl Setup
 	public override void OnShow()
 	{
 		if (view == null)
 		{
-			view = windowManager.GetWindowView<UIMenuView>("UIMenu");
-			view.nextMenu.onClick.Add(new EventDelegate(OnNextWindow));
-			view.popWindow.onClick.Add(new EventDelegate(OnPopWindow));
+			view = windowManager.GetWindowView<UIWarningView>("UIWarning");
+			view.ok.onClick.Add(new EventDelegate(OnOK));
 		}
 	}
 
@@ -32,16 +32,10 @@ public class UIMenuCtrl : UIWindowCtrl {
 	}
 
 	// Button Event
-	void OnNextWindow()
+	void OnOK()
 	{
-		// Show Next Window
-		windowManager.ShowWindow<UIMenu2Ctrl>();
-	}
-
-	void OnPopWindow()
-	{
-		// Show Pop Window
-		windowManager.ShowWindow<UIWarningCtrl>(true);
+		// Remove self
+		windowManager.PopWindow();
 	}
 
 	void OnDestroy()
