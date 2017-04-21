@@ -6,7 +6,7 @@ public class UIWindowCtrl : MonoBehaviour
 {
 	protected UIWindowManager windowManager = null;
 
-	void Start()
+	void Awake()
 	{
 		windowManager = UIWindowManager.Instance;
 	}
@@ -33,7 +33,7 @@ public class UIWindowView : MonoBehaviour
 	{
 		panel = gameObject.GetComponent<UIPanel>();
 		Debug.Assert(panel != null, string.Format("{0} doesn't have UIPanel.", this.name));
-		panel.sortingOrder = (int)UILayer;
+		panel.sortingLayerName = UILayer.ToString();
 		panel.depth = UIDepth;
 	}
 }

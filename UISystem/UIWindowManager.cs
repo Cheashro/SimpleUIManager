@@ -15,8 +15,7 @@ public class UIWindowManager : Singleton<UIWindowManager> {
 	GameObject uiBase = null;
 	Stack<UIWindowCtrl> windowStack = null;
 
-	// Use this for initialization
-	void Initialize() {
+	public void Initialize() {
 		uiBase = CreateUIBase();
 		windowStack = new Stack<UIWindowCtrl>();
 	}
@@ -30,7 +29,7 @@ public class UIWindowManager : Singleton<UIWindowManager> {
 		controller.OnShow();
 
 		// Hide Top Window
-		if (!hasBackground)
+		if (!hasBackground && windowStack.Count > 0)
 		{
 			UIWindowCtrl topWindow = windowStack.Peek();
 			topWindow.OnHide();
@@ -80,8 +79,7 @@ public class UIWindowManager : Singleton<UIWindowManager> {
 
 	GameObject CreateUIBase()
 	{
-		GameObject ui = GameObject.Instantiate(Resources.Load("UI/GUI")) as GameObject;
-		GameObject cameraObj = ui.GetComponentInChildren<UICamera>().gameObject;
-		return cameraObj;
+		GameObject ui = GameObject.Instantiate(Resources.Load("UI/UIBase")) as GameObject;
+		return ui;
 	}
 }
